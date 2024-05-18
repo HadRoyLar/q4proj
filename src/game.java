@@ -1,4 +1,3 @@
-
 import java.awt.Color;
 import java.awt.Dimension;
 import java.awt.Rectangle;
@@ -7,12 +6,10 @@ import java.awt.event.ActionListener;
 import java.util.Arrays;
 import java.util.Random;
 import javax.swing.*;
-
 /*
  * Click nbfs://nbhost/SystemFileSystem/Templates/Licenses/license-default.txt to change this license
  * Click nbfs://nbhost/SystemFileSystem/Templates/Classes/Class.java to edit this template
  */
-
 /**
  *
  * @author Royce Lariego
@@ -25,7 +22,22 @@ public class game implements ActionListener{
      JButton novak;
      JButton course;
      
+     JButton ml;
+     JButton tl;
+     JButton br;
+     JButton tr;
      
+     /*
+    
+                  (var1)sin(var2)
+     (tosolve) = ------------------
+                     sin (var3)
+     
+     */
+     
+     JTextField alpha;
+     JTextField beta;
+     JTextField gamma;
      
      public game() {
          
