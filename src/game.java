@@ -26,6 +26,10 @@ public class game implements ActionListener{
      JButton tl;
      JButton br;
      JButton tr;
+     JLabel sintop;
+     JLabel sinbot;
+     JLabel equal;
+     JLabel fraction;
      
      /*
     
@@ -47,6 +51,16 @@ public class game implements ActionListener{
          course = new JButton("CHANGE");
          
          
+         ml = new JButton("97");
+         tl = new JButton("(12)");
+         br = new JButton("(16)");
+         tr = new JButton("(12)");
+         sintop = new JLabel("sin");
+         sinbot = new JLabel("sin");
+         equal = new JLabel("=");
+         fraction = new JLabel("-----------------------------------------------------");
+         
+         
          for(int i=0; i==7; i++) {
              
          }
@@ -62,10 +76,7 @@ public class game implements ActionListener{
          vars[6] = "δ";
          vars[7] = "ε";
          
-         s.init();
-        t.init();
-        u.init();
-        v.init();
+        
         w.init();
         x.init();
         y.init();
@@ -81,12 +92,24 @@ public class game implements ActionListener{
         frame.setVisible(true);
         frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
         frame.setResizable(false);
-        frame.add(novak, new Rectangle(14,8,2,2));
-        frame.add(course, new Rectangle(16,8,2,2));
         novak.setText("HELS");
         
         novak.addActionListener(this);
         course.addActionListener(this);
+        
+        frame.add(ml, new Rectangle(9,9,2,2));
+        frame.add(tl, new Rectangle(13,7,2,2));
+        frame.add(sintop, new Rectangle(15,7,2,2));
+        frame.add(tr, new Rectangle(17,7,2,2));
+        frame.add(sinbot, new Rectangle(14,11,2,2));
+        frame.add(br, new Rectangle(16,11,2,2));
+        frame.add(equal, new Rectangle(11,9,2,2));
+        frame.add(fraction, new Rectangle(13,9,6,2));
+        
+        ml.addActionListener(this);
+        tl.addActionListener(this);
+        tr.addActionListener(this);
+        br.addActionListener(this);
         
         
      }
@@ -95,64 +118,116 @@ public class game implements ActionListener{
         game x = new game();
         x.setFrame();
         
-        
     }
+     
+     public void sequence() {
+         
+     }
      
      String[] vars = new String[8];
      
-     RNG s = new RNG();
-     RNG t = new RNG();
-     RNG u = new RNG();
-     RNG v = new RNG();
+     
      RNG w = new RNG();
      RNG x = new RNG();
      RNG y = new RNG();
      RNG z = new RNG();
      
      int[] sk = new int[8];
-     int g=0;
+     int a=0;
+     int b=0;
+     int c=0;
+     int d=0;
      
      @Override
     public void actionPerformed(ActionEvent e) {
-        if(e.getSource()==novak) {
+        
+        if(e.getSource()==ml) {
+            Random rand = new Random();
+            
+            sk = w.gen();
+            System.out.println(Arrays.toString(sk));
+            
+            
+            if(a>7) {
+                a=0;
+            }
+            else{}
+            
+                ml.setText(vars[sk[a]]);
+                a++;
+                
+                float r = (float) (rand.nextFloat() / 2f + 0.5);
+float g =   (float) (rand.nextFloat() / 2f + 0.5);
+float b =   (float) (rand.nextFloat() / 2f + 0.5);
+                ml.setBackground(new Color(r,g,b));
+            
+        }
+        else if(e.getSource()==tl) {
             Random rand = new Random();
             
             sk = x.gen();
             System.out.println(Arrays.toString(sk));
             
             
-            if(g>7) {
-                g=0;
+            if(b>7) {
+                b=0;
             }
             else{}
             
-                novak.setText(vars[sk[g]]);
-                g++;
+                tl.setText(vars[sk[b]]);
+                b++;
                 
                 float r = (float) (rand.nextFloat() / 2f + 0.5);
 float g =   (float) (rand.nextFloat() / 2f + 0.5);
 float b =   (float) (rand.nextFloat() / 2f + 0.5);
-                novak.setBackground(new Color(r,g,b));
-                novak.setOpaque(false);
-                novak.setFocusPainted(false);
-                novak.setBorderPainted(false);
+                tl.setBackground(new Color(r,g,b));
+        }
+        else if(e.getSource()==tr) {
+            Random rand = new Random();
+            
+            sk = y.gen();
+            System.out.println(Arrays.toString(sk));
+            
+            
+            if(c>7) {
+                c=0;
+            }
+            else{}
+            
+                tr.setText(vars[sk[c]]);
+                c++;
+                
+                float r = (float) (rand.nextFloat() / 2f + 0.5);
+float g =   (float) (rand.nextFloat() / 2f + 0.5);
+float b =   (float) (rand.nextFloat() / 2f + 0.5);
+                tr.setBackground(new Color(r,g,b));
             
         }
-        else if(e.getSource()==course) {
-            x.randinit();
+        else if(e.getSource()==br) {
+            Random rand = new Random();
             
+            sk = z.gen();
+            System.out.println(Arrays.toString(sk));
+            
+            
+            if(d>7) {
+                d=0;
+            }
+            else{}
+            
+                br.setText(vars[sk[d]]);
+                d++;
+                
+                float r = (float) (rand.nextFloat() / 2f + 0.5);
+float g =   (float) (rand.nextFloat() / 2f + 0.5);
+float b =   (float) (rand.nextFloat() / 2f + 0.5);
+               br.setBackground(new Color(r,g,b));
         }
-        
         
         
         
         
     }
      
-    public void blog() {
-        
-        
-        
-    }
     
 }
