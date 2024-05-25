@@ -113,8 +113,6 @@ public class game implements ActionListener {
         
         frame.add(hyt, new Rectangle(5,4,10,3));
         
-        sider();
-        newline();
 
     }
 
@@ -175,18 +173,196 @@ public class game implements ActionListener {
     }
      
      int decider;
+     int velos;
      
      public void sequence() {
-         decider=ThreadLocalRandom.current().nextInt(0, 2 + 1);
+         sider();
+         newline();
+         decider = ThreadLocalRandom.current().nextInt(0, 2 + 1);
+         velos = ThreadLocalRandom.current().nextInt(0, 1 + 1);
+         
          switch(decider) {
              case 0 -> {
-                 
+                 //case s1 (a) unknown
+                 if(velos==0) {
+                     //case beta(a2), b(s2) given
+                     System.out.println("GivenIs:");
+                     System.out.println("b = "+s1);
+                     System.out.println("beta = "+a2);
+                     System.out.println("gamma = "+a3);
+                     System.out.println("I want to find: a = "+s1);
+                     System.out.println("I want to find: alpha = "+a1);
+                     
+                 }
+                 else if(velos==1) {
+                     //case gamma(a3), c(s3) given
+                     System.out.println("GivenIs:");
+                     System.out.println("b = "+s1);
+                     System.out.println("beta = "+a2);
+                     System.out.println("gamma = "+a3);
+                     System.out.println("I want to find: a = "+s1);
+                     System.out.println("I want to find: alpha = "+a1);
+                     
+                     
+                     
+                 }
              }
              case 1 -> {
-                 
+                 //case s2 (b) unknown
+                 if(velos==0) {
+                     //case alpha(a1), a(s1) given
+                     if((ml.getText().equals(String.valueOf(s2)))&&
+                             (tl.getText().equals(String.valueOf(s1)))&&
+                             (tr.getText().equals(String.valueOf(a2)))&&
+                             (br.getText().equals(String.valueOf(a1)))) {
+                             System.out.println("CORRECT");
+                     }
+                         
+                     else {
+                             System.out.println("INCORRECT");
+                             }
+                     
+                 }
+                 else if(velos==1) {
+                     //case gamma(a3), c(s3) given
+                     if((ml.getText().equals(String.valueOf(s2)))&&
+                             (tl.getText().equals(String.valueOf(s3)))&&
+                             (tr.getText().equals(String.valueOf(a2)))&&
+                             (br.getText().equals(String.valueOf(a3)))) {
+                             System.out.println("CORRECT");
+                     }
+                         
+                     else {
+                              System.out.println("INCORRECT");
+                             }
+                 }
              }
              case 2 -> {
-                 
+                 //case s3 (c) unknown
+                 if(velos==0) {
+                     //case alpha(a1), a(s1) given
+                     if((ml.getText().equals(String.valueOf(s3)))&&
+                             (tl.getText().equals(String.valueOf(s1)))&&
+                             (tr.getText().equals(String.valueOf(a3)))&&
+                             (br.getText().equals(String.valueOf(a1)))) {
+                             System.out.println("CORRECT");
+                     }
+                         
+                     else {
+                             System.out.println("INCORRECT");
+                             }
+                 }
+                 else if(velos==1) {
+                     //case beta(a2), b(s2) given
+                     if((ml.getText().equals(String.valueOf(s3)))&&
+                             (tl.getText().equals(String.valueOf(s2)))&&
+                             (tr.getText().equals(String.valueOf(a1)))&&
+                             (br.getText().equals(String.valueOf(a2)))) {
+                             System.out.println("CORRECT");
+                     }
+                         
+                     else {
+                             System.out.println("INCORRECT");
+                             }
+                 }
+             }
+         }
+         
+     }
+     
+     
+     public void checker() {
+         switch(decider) {
+             case 0 -> {
+                 //case s1 (a) unknown
+                 if(velos==0) {
+                     //case beta(a2), b(s2) given
+                     if((ml.getText().equals(String.valueOf(s1)))&&
+                             (tl.getText().equals(String.valueOf(s2)))&&
+                             (tr.getText().equals(String.valueOf(a1)))&&
+                             (br.getText().equals(String.valueOf(a2)))) {
+                             System.out.println("CORRECT");
+                     }
+                         
+                     else {
+                         System.out.println("INCORRECT");
+                             
+                             }
+                     
+                 }
+                 else if(velos==1) {
+                     //case gamma(a3), c(s3) given
+                     if((ml.getText().equals(String.valueOf(s1)))&&
+                             (tl.getText().equals(String.valueOf(s3)))&&
+                             (tr.getText().equals(String.valueOf(a1)))&&
+                             (br.getText().equals(String.valueOf(a3)))) {
+                             System.out.println("CORRECT");
+                             
+                     }
+                         
+                     else {
+                             System.out.println("INCORRECT");
+                             }
+                 }
+             }
+             case 1 -> {
+                 //case s2 (b) unknown
+                 if(velos==0) {
+                     //case alpha(a1), a(s1) given
+                     if((ml.getText().equals(String.valueOf(s2)))&&
+                             (tl.getText().equals(String.valueOf(s1)))&&
+                             (tr.getText().equals(String.valueOf(a2)))&&
+                             (br.getText().equals(String.valueOf(a1)))) {
+                             System.out.println("CORRECT");
+                     }
+                         
+                     else {
+                             System.out.println("INCORRECT");
+                             }
+                     
+                 }
+                 else if(velos==1) {
+                     //case gamma(a3), c(s3) given
+                     if((ml.getText().equals(String.valueOf(s2)))&&
+                             (tl.getText().equals(String.valueOf(s3)))&&
+                             (tr.getText().equals(String.valueOf(a2)))&&
+                             (br.getText().equals(String.valueOf(a3)))) {
+                             System.out.println("CORRECT");
+                     }
+                         
+                     else {
+                              System.out.println("INCORRECT");
+                             }
+                 }
+             }
+             case 2 -> {
+                 //case s3 (c) unknown
+                 if(velos==0) {
+                     //case alpha(a1), a(s1) given
+                     if((ml.getText().equals(String.valueOf(s3)))&&
+                             (tl.getText().equals(String.valueOf(s1)))&&
+                             (tr.getText().equals(String.valueOf(a3)))&&
+                             (br.getText().equals(String.valueOf(a1)))) {
+                             System.out.println("CORRECT");
+                     }
+                         
+                     else {
+                             System.out.println("INCORRECT");
+                             }
+                 }
+                 else if(velos==1) {
+                     //case beta(a2), b(s2) given
+                     if((ml.getText().equals(String.valueOf(s3)))&&
+                             (tl.getText().equals(String.valueOf(s2)))&&
+                             (tr.getText().equals(String.valueOf(a1)))&&
+                             (br.getText().equals(String.valueOf(a2)))) {
+                             System.out.println("CORRECT");
+                     }
+                         
+                     else {
+                             System.out.println("INCORRECT");
+                             }
+                 }
              }
          }
      }
