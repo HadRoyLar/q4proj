@@ -25,6 +25,5 @@ public class RNG {
     
     public void randinit() {
         Collections.shuffle(numbers);
-        
     }
 }
