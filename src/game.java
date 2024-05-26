@@ -31,6 +31,7 @@ public class game implements ActionListener {
     JLabel sinbot;
     JLabel equal;
     JLabel fraction;
+    JButton NEWS;
 
     /*
     
@@ -52,7 +53,7 @@ public class game implements ActionListener {
         novak = new JButton("");
         course = new JButton("CHANGE");
         hyt = new JTextField("");
-
+        NEWS = new JButton("JSA");
         ml = new JButton("97");
         tl = new JButton("(12)");
         br = new JButton("(16)");
@@ -105,11 +106,13 @@ public class game implements ActionListener {
         frame.add(br, new Rectangle(16, 11, 2, 2));
         frame.add(equal, new Rectangle(11, 9, 2, 2));
         frame.add(fraction, new Rectangle(13, 9, 6, 2));
+        frame.add(NEWS, new Rectangle(19,9,2,2));
 
         ml.addActionListener(this);
         tl.addActionListener(this);
         tr.addActionListener(this);
         br.addActionListener(this);
+        NEWS.addActionListener(this);
         
         frame.add(hyt, new Rectangle(5,4,10,3));
         
@@ -211,59 +214,43 @@ public class game implements ActionListener {
                  //case s2 (b) unknown
                  if(velos==0) {
                      //case alpha(a1), a(s1) given
-                     if((ml.getText().equals(String.valueOf(s2)))&&
-                             (tl.getText().equals(String.valueOf(s1)))&&
-                             (tr.getText().equals(String.valueOf(a2)))&&
-                             (br.getText().equals(String.valueOf(a1)))) {
-                             System.out.println("CORRECT");
-                     }
-                         
-                     else {
-                             System.out.println("INCORRECT");
-                             }
+                     System.out.println("GivenIs:");
+                     System.out.println("a = "+s1);
+                     System.out.println("alpha = "+a1);
+                     System.out.println("gamma = "+a3);
+                     System.out.println("I want to find: b = "+s2);
+                     System.out.println("I want to find: beta = "+a1);
                      
                  }
                  else if(velos==1) {
                      //case gamma(a3), c(s3) given
-                     if((ml.getText().equals(String.valueOf(s2)))&&
-                             (tl.getText().equals(String.valueOf(s3)))&&
-                             (tr.getText().equals(String.valueOf(a2)))&&
-                             (br.getText().equals(String.valueOf(a3)))) {
-                             System.out.println("CORRECT");
-                     }
-                         
-                     else {
-                              System.out.println("INCORRECT");
-                             }
+                     System.out.println("GivenIs:");
+                     System.out.println("c = "+s3);
+                     System.out.println("alpha = "+a1);
+                     System.out.println("gamma = "+a3);
+                     System.out.println("I want to find: b = "+s2);
+                     System.out.println("I want to find: beta = "+a1);
                  }
              }
              case 2 -> {
                  //case s3 (c) unknown
                  if(velos==0) {
                      //case alpha(a1), a(s1) given
-                     if((ml.getText().equals(String.valueOf(s3)))&&
-                             (tl.getText().equals(String.valueOf(s1)))&&
-                             (tr.getText().equals(String.valueOf(a3)))&&
-                             (br.getText().equals(String.valueOf(a1)))) {
-                             System.out.println("CORRECT");
-                     }
-                         
-                     else {
-                             System.out.println("INCORRECT");
-                             }
+                     System.out.println("GivenIs:");
+                     System.out.println("a = "+s1);
+                     System.out.println("alpha = "+a1);
+                     System.out.println("beta = "+a2);
+                     System.out.println("I want to find: c = "+s3);
+                     System.out.println("I want to find: gamma = "+a3);
                  }
                  else if(velos==1) {
                      //case beta(a2), b(s2) given
-                     if((ml.getText().equals(String.valueOf(s3)))&&
-                             (tl.getText().equals(String.valueOf(s2)))&&
-                             (tr.getText().equals(String.valueOf(a1)))&&
-                             (br.getText().equals(String.valueOf(a2)))) {
-                             System.out.println("CORRECT");
-                     }
-                         
-                     else {
-                             System.out.println("INCORRECT");
-                             }
+                     System.out.println("GivenIs:");
+                     System.out.println("b = "+s2);
+                     System.out.println("alpha = "+a1);
+                     System.out.println("beta = "+a2);
+                     System.out.println("I want to find: c = "+s3);
+                     System.out.println("I want to find: gamma = "+a3);
                  }
              }
          }
@@ -303,7 +290,7 @@ public class game implements ActionListener {
                      else {
                              System.out.println("INCORRECT");
                              }
-                 }
+                 } 
              }
              case 1 -> {
                  //case s2 (b) unknown
@@ -390,11 +377,28 @@ public class game implements ActionListener {
     int b = 0;
     int c = 0;
     int d = 0;
+    int count;
 
     @Override
     public void actionPerformed(ActionEvent e) {
+        
+        if (e.getSource() == NEWS) {
+            
+            if(count==0) {
+                sequence();
+                frame.invalidate();
+                frame.validate();
+            }
+            else {
+                checker();
+                sequence();
+            }
+            count++;
+            
+            
+        }
 
-        if (e.getSource() == ml) {
+        else if (e.getSource() == ml) {
             Random rand = new Random();
 
             sk = w.gen();
