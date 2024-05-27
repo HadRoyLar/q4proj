@@ -33,9 +33,9 @@ public class game implements ActionListener {
     JLabel fraction;
     JButton NEWS;
     
-    JLabel AS1; //a, b, c
-    JLabel AS2; //b, c, a
-    JLabel AS3; //c, a, b
+    JLabel AS1;
+    JLabel AS2; 
+    JLabel AS3; 
 
     /*
     
@@ -70,8 +70,12 @@ public class game implements ActionListener {
         fraction = new JLabel("-----------------------------------------------------");
         
         AS1 = new JLabel("TEST1");
-        AS2 = new JLabel("TEST2");
-        AS3 = new JLabel("TEST3");
+        AS2 = new JLabel("TEST2"); 
+        AS3 = new JLabel("TEST3"); 
+        
+        alpha = new JTextField("alpha");
+        beta = new JTextField("beta");
+        gamma = new JTextField("gamma");
 
         for (int i = 0; i == 7; i++) {
 
@@ -108,7 +112,11 @@ public class game implements ActionListener {
 
         novak.addActionListener(this);
         course.addActionListener(this);
-
+        
+        
+        frame.add(alpha, new Rectangle(1,7,2,1));
+        frame.add(beta, new Rectangle(3,7,2,1));
+        frame.add(gamma, new Rectangle(5,7,2,1));
         frame.add(ml, new Rectangle(9, 9, 2, 2));
         frame.add(tl, new Rectangle(13, 7, 2, 2));
         frame.add(sintop, new Rectangle(15, 7, 2, 2));
@@ -206,6 +214,9 @@ public class game implements ActionListener {
                     System.out.println("b = " + s2);
                     System.out.println("beta = " + a2);
                     System.out.println("gamma = " + a3);
+                    alpha.setText("alpha");
+                    beta.setText(a2+"");
+                    gamma.setText(a3+"");
                     System.out.println("I want to find: a = " + s1);
                     System.out.println("I want to find: alpha = " + a1);                    
             
@@ -216,6 +227,9 @@ public class game implements ActionListener {
                     System.out.println("c = " + s3);
                     System.out.println("beta = " + a2);
                     System.out.println("gamma = " + a3);
+                    alpha.setText("alpha");
+                    beta.setText(a2+"");
+                    gamma.setText(a3+"");
                     System.out.println("I want to find: a = " + s1);
                     System.out.println("I want to find: alpha = " + a1);
                     
@@ -229,6 +243,9 @@ public class game implements ActionListener {
                     System.out.println("a = " + s1);
                     System.out.println("alpha = " + a1);
                     System.out.println("gamma = " + a3);
+                    alpha.setText(a1+"");
+                    beta.setText("beta");
+                    gamma.setText(a3+"");
                     System.out.println("I want to find: b = " + s2);
                     System.out.println("I want to find: beta = " + a1);
                     
@@ -238,6 +255,9 @@ public class game implements ActionListener {
                     System.out.println("c = " + s3);
                     System.out.println("alpha = " + a1);
                     System.out.println("gamma = " + a3);
+                    alpha.setText(a1+"");
+                    beta.setText("beta");
+                    gamma.setText(a3+"");
                     System.out.println("I want to find: b = " + s2);
                     System.out.println("I want to find: beta = " + a1);
                 }
@@ -251,6 +271,9 @@ public class game implements ActionListener {
                     System.out.println("a = " + s1);
                     System.out.println("alpha = " + a1);
                     System.out.println("beta = " + a2);
+                    alpha.setText(a1+"");
+                    beta.setText(a2+"");
+                    gamma.setText("gamma");
                     System.out.println("I want to find: c = " + s3);
                     System.out.println("I want to find: gamma = " + a3);
                 } else if (velos == 1) {
@@ -259,6 +282,9 @@ public class game implements ActionListener {
                     System.out.println("b = " + s2);
                     System.out.println("alpha = " + a1);
                     System.out.println("beta = " + a2);
+                    alpha.setText(a1+"");
+                    beta.setText(a2+"");
+                    gamma.setText("gamma");
                     System.out.println("I want to find: c = " + s3);
                     System.out.println("I want to find: gamma = " + a3);
                 }
