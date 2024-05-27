@@ -1,3 +1,4 @@
+
 import java.awt.Color;
 import java.awt.Dimension;
 import java.awt.Rectangle;
@@ -16,7 +17,6 @@ import javax.swing.*;
  *
  * @author Royce Lariego
  */
-
 public class game implements ActionListener {
 
     JFrame frame;
@@ -32,10 +32,10 @@ public class game implements ActionListener {
     JLabel equal;
     JLabel fraction;
     JButton NEWS;
-    
+
     JLabel AS1;
-    JLabel AS2; 
-    JLabel AS3; 
+    JLabel AS2;
+    JLabel AS3;
 
     /*
     
@@ -44,11 +44,9 @@ public class game implements ActionListener {
                      sin (var3)
      
      */
-    
     JTextField alpha;
     JTextField beta;
     JTextField gamma;
-    
 
     JTextField hyt;
 
@@ -68,11 +66,11 @@ public class game implements ActionListener {
         sinbot = new JLabel("sin");
         equal = new JLabel("=");
         fraction = new JLabel("-----------------------------------------------------");
-        
+
         AS1 = new JLabel("TEST1");
-        AS2 = new JLabel("TEST2"); 
-        AS3 = new JLabel("TEST3"); 
-        
+        AS2 = new JLabel("TEST2");
+        AS3 = new JLabel("TEST3");
+
         alpha = new JTextField("alpha");
         beta = new JTextField("beta");
         gamma = new JTextField("gamma");
@@ -89,8 +87,6 @@ public class game implements ActionListener {
         vars[5] = "γ";
         vars[6] = "δ";
         vars[7] = "ε";
-        
-        
 
         w.init();
         x.init();
@@ -112,11 +108,10 @@ public class game implements ActionListener {
 
         novak.addActionListener(this);
         course.addActionListener(this);
-        
-        
-        frame.add(alpha, new Rectangle(1,7,2,1));
-        frame.add(beta, new Rectangle(3,7,2,1));
-        frame.add(gamma, new Rectangle(5,7,2,1));
+
+        frame.add(alpha, new Rectangle(1, 7, 2, 1));
+        frame.add(beta, new Rectangle(3, 7, 2, 1));
+        frame.add(gamma, new Rectangle(5, 7, 2, 1));
         frame.add(ml, new Rectangle(9, 9, 2, 2));
         frame.add(tl, new Rectangle(13, 7, 2, 2));
         frame.add(sintop, new Rectangle(15, 7, 2, 2));
@@ -134,7 +129,7 @@ public class game implements ActionListener {
         NEWS.addActionListener(this);
 
         frame.add(hyt, new Rectangle(5, 4, 10, 3));
-        
+
     }
 
     public static void main(String[] args) {
@@ -190,16 +185,16 @@ public class game implements ActionListener {
 
     int decider;
     int velos;
-    
+
     public double[] autoset() {
-        
+
         return null;
     }
 
     int[] ded;
-    
+
     public void sequence() {
-        
+
         sider();
         newline();
         decider = ThreadLocalRandom.current().nextInt(0, 2 + 1);
@@ -215,12 +210,11 @@ public class game implements ActionListener {
                     System.out.println("beta = " + a2);
                     System.out.println("gamma = " + a3);
                     alpha.setText("alpha");
-                    beta.setText(a2+"");
-                    gamma.setText(a3+"");
+                    beta.setText(a2 + "");
+                    gamma.setText(a3 + "");
                     System.out.println("I want to find: a = " + s1);
-                    System.out.println("I want to find: alpha = " + a1);                    
-            
-                    
+                    System.out.println("I want to find: alpha = " + a1);
+
                 } else if (velos == 1) {
                     //case gamma(a3), c(s3) given
                     System.out.println("GivenIs:");
@@ -228,11 +222,11 @@ public class game implements ActionListener {
                     System.out.println("beta = " + a2);
                     System.out.println("gamma = " + a3);
                     alpha.setText("alpha");
-                    beta.setText(a2+"");
-                    gamma.setText(a3+"");
+                    beta.setText(a2 + "");
+                    gamma.setText(a3 + "");
                     System.out.println("I want to find: a = " + s1);
                     System.out.println("I want to find: alpha = " + a1);
-                    
+
                 }
             }
             case 1 -> {
@@ -243,21 +237,21 @@ public class game implements ActionListener {
                     System.out.println("a = " + s1);
                     System.out.println("alpha = " + a1);
                     System.out.println("gamma = " + a3);
-                    alpha.setText(a1+"");
+                    alpha.setText(a1 + "");
                     beta.setText("beta");
-                    gamma.setText(a3+"");
+                    gamma.setText(a3 + "");
                     System.out.println("I want to find: b = " + s2);
                     System.out.println("I want to find: beta = " + a1);
-                    
+
                 } else if (velos == 1) {
                     //case gamma(a3), c(s3) given
                     System.out.println("GivenIs:");
                     System.out.println("c = " + s3);
                     System.out.println("alpha = " + a1);
                     System.out.println("gamma = " + a3);
-                    alpha.setText(a1+"");
+                    alpha.setText(a1 + "");
                     beta.setText("beta");
-                    gamma.setText(a3+"");
+                    gamma.setText(a3 + "");
                     System.out.println("I want to find: b = " + s2);
                     System.out.println("I want to find: beta = " + a1);
                 }
@@ -271,8 +265,8 @@ public class game implements ActionListener {
                     System.out.println("a = " + s1);
                     System.out.println("alpha = " + a1);
                     System.out.println("beta = " + a2);
-                    alpha.setText(a1+"");
-                    beta.setText(a2+"");
+                    alpha.setText(a1 + "");
+                    beta.setText(a2 + "");
                     gamma.setText("gamma");
                     System.out.println("I want to find: c = " + s3);
                     System.out.println("I want to find: gamma = " + a3);
@@ -282,8 +276,8 @@ public class game implements ActionListener {
                     System.out.println("b = " + s2);
                     System.out.println("alpha = " + a1);
                     System.out.println("beta = " + a2);
-                    alpha.setText(a1+"");
-                    beta.setText(a2+"");
+                    alpha.setText(a1 + "");
+                    beta.setText(a2 + "");
                     gamma.setText("gamma");
                     System.out.println("I want to find: c = " + s3);
                     System.out.println("I want to find: gamma = " + a3);
@@ -294,6 +288,11 @@ public class game implements ActionListener {
     }
 
     public void checker() {
+        w.randinit();
+        x.randinit();
+        y.randinit();
+        z.randinit();
+
         switch (decider) {
             case 0 -> {
                 //case s1 (a) unknown
@@ -302,7 +301,7 @@ public class game implements ActionListener {
                     if ((ml.getText().equals(String.valueOf(s1)))
                             && (tl.getText().equals(String.valueOf(s2)))
                             && (tr.getText().equals(String.valueOf(a1)))
-                            && (br.getText().equals(String.valueOf(a2)))) {
+                            && (br.getText().equals(String.valueOf(a2))) && alpha.getText().equals(String.valueOf(a1))) {
                         System.out.println("CORRECT");
                     } else {
                         System.out.println("INCORRECT");
@@ -313,7 +312,7 @@ public class game implements ActionListener {
                     if ((ml.getText().equals(String.valueOf(s1)))
                             && (tl.getText().equals(String.valueOf(s3)))
                             && (tr.getText().equals(String.valueOf(a1)))
-                            && (br.getText().equals(String.valueOf(a3)))) {
+                            && (br.getText().equals(String.valueOf(a3))) && alpha.getText().equals(String.valueOf(a1))) {
                         System.out.println("CORRECT");
 
                     } else {
@@ -328,7 +327,7 @@ public class game implements ActionListener {
                     if ((ml.getText().equals(String.valueOf(s2)))
                             && (tl.getText().equals(String.valueOf(s1)))
                             && (tr.getText().equals(String.valueOf(a2)))
-                            && (br.getText().equals(String.valueOf(a1)))) {
+                            && (br.getText().equals(String.valueOf(a1))) && beta.getText().equals(String.valueOf(a2))) {
                         System.out.println("CORRECT");
                     } else {
                         System.out.println("INCORRECT");
@@ -353,7 +352,7 @@ public class game implements ActionListener {
                     if ((ml.getText().equals(String.valueOf(s3)))
                             && (tl.getText().equals(String.valueOf(s1)))
                             && (tr.getText().equals(String.valueOf(a3)))
-                            && (br.getText().equals(String.valueOf(a1)))) {
+                            && (br.getText().equals(String.valueOf(a1))) && gamma.getText().equals(String.valueOf(a3))) {
                         System.out.println("CORRECT");
                     } else {
                         System.out.println("INCORRECT");
@@ -363,7 +362,7 @@ public class game implements ActionListener {
                     if ((ml.getText().equals(String.valueOf(s3)))
                             && (tl.getText().equals(String.valueOf(s2)))
                             && (tr.getText().equals(String.valueOf(a1)))
-                            && (br.getText().equals(String.valueOf(a2)))) {
+                            && (br.getText().equals(String.valueOf(a2))) && gamma.getText().equals(String.valueOf(a3))) {
                         System.out.println("CORRECT");
                     } else {
                         System.out.println("INCORRECT");
@@ -374,7 +373,7 @@ public class game implements ActionListener {
     }
 
     public void newline() {
-        
+
         vars[0] = String.valueOf(s1);
         vars[1] = String.valueOf(s2);
         vars[2] = String.valueOf(s3);
@@ -383,7 +382,7 @@ public class game implements ActionListener {
         vars[5] = String.valueOf(a3);
         vars[6] = String.valueOf((double) Math.round((ThreadLocalRandom.current().nextDouble(4, 100 + 1)) * 100) / 100);
         vars[7] = String.valueOf((double) Math.round((ThreadLocalRandom.current().nextDouble(4, 100 + 1)) * 100) / 100);
-        
+
     }
 
     String[] vars = new String[8];
@@ -419,7 +418,6 @@ public class game implements ActionListener {
             Random rand = new Random();
 
             sk = w.gen();
-            System.out.println(Arrays.toString(sk));
 
             if (a > 7) {
                 a = 0;
@@ -437,7 +435,6 @@ public class game implements ActionListener {
             Random rand = new Random();
 
             sk = x.gen();
-            System.out.println(Arrays.toString(sk));
 
             if (b > 7) {
                 b = 0;
@@ -455,7 +452,6 @@ public class game implements ActionListener {
             Random rand = new Random();
 
             sk = y.gen();
-            System.out.println(Arrays.toString(sk));
 
             if (c > 7) {
                 c = 0;
@@ -474,7 +470,6 @@ public class game implements ActionListener {
             Random rand = new Random();
 
             sk = z.gen();
-            System.out.println(Arrays.toString(sk));
 
             if (d > 7) {
                 d = 0;
