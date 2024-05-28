@@ -8,6 +8,8 @@ import java.util.Arrays;
 import java.util.Random;
 import java.util.concurrent.ThreadLocalRandom;
 import javax.swing.*;
+import javax.swing.event.DocumentEvent;
+import javax.swing.event.DocumentListener;
 
 /*
  * Click nbfs://nbhost/SystemFileSystem/Templates/Licenses/license-default.txt to change this license
@@ -47,7 +49,7 @@ public class game implements ActionListener {
     JTextField α;
     JTextField β;
     JTextField γ;
-    
+
     JButton sendsel;
 
     JTextField hyt;
@@ -68,7 +70,7 @@ public class game implements ActionListener {
         sinbot = new JLabel("sin");
         equal = new JLabel("=");
         fraction = new JLabel("-----------------------------------------------------");
-        
+
         sendsel = new JButton("sendsel");
 
         AS1 = new JLabel("TEST1");
@@ -125,32 +127,81 @@ public class game implements ActionListener {
         frame.add(equal, new Rectangle(11, 9, 2, 2));
         frame.add(fraction, new Rectangle(13, 9, 6, 2));
         frame.add(NEWS, new Rectangle(19, 9, 2, 2));
-        frame.add(sendsel, new Rectangle(24,4,2,2));
+        frame.add(sendsel, new Rectangle(24, 4, 2, 2));
 
         ml.addActionListener(this);
         tl.addActionListener(this);
         tr.addActionListener(this);
         br.addActionListener(this);
-        
-        
+
         NEWS.addActionListener(this);
         sendsel.addActionListener(this);
 
         frame.add(hyt, new Rectangle(5, 4, 10, 3));
+        
+        
+        
+        
+        
+        α.getDocument().addDocumentListener(new DocumentListener() {
+            @Override
+            public void insertUpdate(DocumentEvent e) {
+                init();
+            }
+
+            @Override
+            public void removeUpdate(DocumentEvent e) {
+                init();
+            }
+            @Override
+            public void changedUpdate(DocumentEvent e) {}
+        });
+        β.getDocument().addDocumentListener(new DocumentListener() {
+            @Override
+            public void insertUpdate(DocumentEvent e) {
+                init();
+            }
+
+            @Override
+            public void removeUpdate(DocumentEvent e) {
+                init();
+            }
+            @Override
+            public void changedUpdate(DocumentEvent e) {}
+        });
+        γ.getDocument().addDocumentListener(new DocumentListener() {
+            @Override
+            public void insertUpdate(DocumentEvent e) {
+                init();
+            }
+
+            @Override
+            public void removeUpdate(DocumentEvent e) {
+                init();
+            }
+            @Override
+            public void changedUpdate(DocumentEvent e) {}
+        });
+        
+        
+        
 
     }
 
     public static void main(String[] args) {
         game x = new game();
         x.setFrame();
+        
+        
 
     }
+    
+    
 
     double s1; //equals to a
     double s2; //equals to b
     double s3; //equals to c
-    
-    
+
     public void sider() {
 
         do {
@@ -183,8 +234,6 @@ public class game implements ActionListener {
                 a1 = (double) Math.round(a1 * 100) / 100;
                 a2 = (double) Math.round(a2 * 100) / 100;
                 a3 = (double) Math.round(a3 * 100) / 100;
-                
-                
 
             } while (((a1 + a2 + a3) != 180) || ((a1 == a2) && (a2 == a3) && (a1 == a3)) || (((a1 + a2 + a3) != 180) && ((a1 == a2) && (a2 == a3) && (a1 == a3))));
         } catch (ArithmeticException e) {
@@ -203,12 +252,11 @@ public class game implements ActionListener {
     }
 
     int[] ded;
-    
 
     public void sequence() {
 
         sider();
-        newline();
+
         decider = ThreadLocalRandom.current().nextInt(0, 2 + 1);
         velos = ThreadLocalRandom.current().nextInt(0, 1 + 1);
 
@@ -238,7 +286,7 @@ public class game implements ActionListener {
                     γ.setText(a3 + "");
                     System.out.println("I want to find: a = " + s1);
                     System.out.println("I want to find: alpha = " + a1);
-
+                    
                 }
             }
             case 1 -> {
@@ -296,6 +344,10 @@ public class game implements ActionListener {
                 }
             }
         }
+
+        newline();
+        
+        
 
     }
 
@@ -389,12 +441,18 @@ public class game implements ActionListener {
         vars[0] = String.valueOf(s1);
         vars[1] = String.valueOf(s2);
         vars[2] = String.valueOf(s3);
-        vars[3] = String.valueOf(a1);
-        vars[4] = String.valueOf(a2);
-        vars[5] = String.valueOf(a3);
+        vars[3] = α.getText();
+        vars[4] = β.getText();
+        vars[5] = γ.getText();
         vars[6] = String.valueOf((double) Math.round((ThreadLocalRandom.current().nextDouble(4, 100 + 1)) * 100) / 100);
         vars[7] = String.valueOf((double) Math.round((ThreadLocalRandom.current().nextDouble(4, 100 + 1)) * 100) / 100);
 
+    }
+    
+    public void init() {
+        vars[3] = α.getText();
+        vars[4] = β.getText();
+        vars[5] = γ.getText();
     }
 
     String[] vars = new String[8];
@@ -413,14 +471,11 @@ public class game implements ActionListener {
 
     @Override
     public void actionPerformed(ActionEvent e) {
-        
-        if (e.getSource() == sendsel) {
-            
-            
-            
-        }
 
-        else if (e.getSource() == NEWS) {
+        if (e.getSource() == sendsel) {
+            newline();
+
+        } else if (e.getSource() == NEWS) {
 
             if (count == 0) {
                 sequence();
