@@ -4,7 +4,6 @@ import java.awt.Dimension;
 import java.awt.Rectangle;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
-import java.util.Arrays;
 import java.util.Random;
 import java.util.concurrent.ThreadLocalRandom;
 import javax.swing.*;
@@ -38,6 +37,8 @@ public class game implements ActionListener {
     JLabel AS1;
     JLabel AS2;
     JLabel AS3;
+    
+    JSpinner ppk;
 
     /*
     
@@ -70,7 +71,8 @@ public class game implements ActionListener {
         sinbot = new JLabel("sin");
         equal = new JLabel("=");
         fraction = new JLabel("-----------------------------------------------------");
-
+        
+        ppk = new JSpinner(new SpinnerNumberModel(5,0,10,1));
         sendsel = new JButton("sendsel");
 
         AS1 = new JLabel("TEST1");
@@ -128,6 +130,23 @@ public class game implements ActionListener {
         frame.add(fraction, new Rectangle(13, 9, 6, 2));
         frame.add(NEWS, new Rectangle(19, 9, 2, 2));
         frame.add(sendsel, new Rectangle(24, 4, 2, 2));
+        
+        frame.add(ppk, new Rectangle(5,6,3,3));
+        
+        
+        Timer timer = new Timer(1000, new ActionListener() {
+            int count = 0;
+
+            @Override
+            public void actionPerformed(ActionEvent e) {
+               System.out.println(count++);
+            }
+        });
+
+        // Start the timer
+        timer.start();
+
+        
 
         ml.addActionListener(this);
         tl.addActionListener(this);
@@ -138,11 +157,7 @@ public class game implements ActionListener {
         sendsel.addActionListener(this);
 
         frame.add(hyt, new Rectangle(5, 4, 10, 3));
-        
-        
-        
-        
-        
+
         α.getDocument().addDocumentListener(new DocumentListener() {
             @Override
             public void insertUpdate(DocumentEvent e) {
@@ -153,8 +168,10 @@ public class game implements ActionListener {
             public void removeUpdate(DocumentEvent e) {
                 init();
             }
+
             @Override
-            public void changedUpdate(DocumentEvent e) {}
+            public void changedUpdate(DocumentEvent e) {
+            }
         });
         β.getDocument().addDocumentListener(new DocumentListener() {
             @Override
@@ -166,8 +183,10 @@ public class game implements ActionListener {
             public void removeUpdate(DocumentEvent e) {
                 init();
             }
+
             @Override
-            public void changedUpdate(DocumentEvent e) {}
+            public void changedUpdate(DocumentEvent e) {
+            }
         });
         γ.getDocument().addDocumentListener(new DocumentListener() {
             @Override
@@ -179,24 +198,19 @@ public class game implements ActionListener {
             public void removeUpdate(DocumentEvent e) {
                 init();
             }
+
             @Override
-            public void changedUpdate(DocumentEvent e) {}
+            public void changedUpdate(DocumentEvent e) {
+            }
         });
-        
-        
-        
 
     }
 
     public static void main(String[] args) {
         game x = new game();
         x.setFrame();
-        
-        
 
     }
-    
-    
 
     double s1; //equals to a
     double s2; //equals to b
@@ -286,7 +300,7 @@ public class game implements ActionListener {
                     γ.setText(a3 + "");
                     System.out.println("I want to find: a = " + s1);
                     System.out.println("I want to find: alpha = " + a1);
-                    
+
                 }
             }
             case 1 -> {
@@ -344,10 +358,10 @@ public class game implements ActionListener {
                 }
             }
         }
+        
+        ((JSpinner.DefaultEditor)ppk.getEditor()).getTextField().setEditable(false);
 
         newline();
-        
-        
 
     }
 
@@ -448,7 +462,7 @@ public class game implements ActionListener {
         vars[7] = String.valueOf((double) Math.round((ThreadLocalRandom.current().nextDouble(4, 100 + 1)) * 100) / 100);
 
     }
-    
+
     public void init() {
         vars[3] = α.getText();
         vars[4] = β.getText();
@@ -468,12 +482,20 @@ public class game implements ActionListener {
     int c = 0;
     int d = 0;
     int count;
+    
+    public void gty() {
+        
+        String j = String.valueOf(ppk.getValue());
+        System.out.println(j);
+        ppk.setValue(29);
+        
+    }
 
     @Override
     public void actionPerformed(ActionEvent e) {
 
         if (e.getSource() == sendsel) {
-            newline();
+            gty();
 
         } else if (e.getSource() == NEWS) {
 
@@ -538,10 +560,11 @@ public class game implements ActionListener {
             float g = (float) (rand.nextFloat() / 2f + 0.5);
             float b = (float) (rand.nextFloat() / 2f + 0.5);
             tr.setBackground(new Color(r, g, b));
+            
 
         } else if (e.getSource() == br) {
             Random rand = new Random();
-
+            
             sk = z.gen();
 
             if (d > 7) {
