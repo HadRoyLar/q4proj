@@ -118,6 +118,7 @@ public class game implements ActionListener {
         });
 
     JButton sendsel;
+    JTextField name;
     
     public void scorer() {
 
@@ -144,6 +145,7 @@ public class game implements ActionListener {
         prompt = new JLabel("<html>Complete the formula step by step. Finish the angles on the figure first (figure not for scale). Then select the correct values for the equation using the buttons. Click on <b>start</b> to start. To submit finished equation, press <b>next</b>.</html>");
         sintop = new JLabel("sin");
         sinbot = new JLabel("sin");
+        name = new JTextField("Your Name");
         equal = new JLabel("=");
         fraction = new JLabel("------------------------------------------------");
         xe = new ImageIcon(getClass().getClassLoader().getResource("assets/illustration.png"));
@@ -402,6 +404,13 @@ timex.setFont(f2);
     String playername = "Elite";
     
     public void saver() {
+        if (name.getText()==null || "".equals(name.getText())) {
+            playername = "Elite";
+            hscore = 600;
+        }
+        else {
+            
+        }
             try {
                 File haynaku = new File("save.txt");
                 Scanner guy = new Scanner(haynaku);
@@ -417,7 +426,6 @@ timex.setFont(f2);
                         
                     }
                     else {
-                        
                         ohio.write(tempread+"\n");
                         hscore = tempread;
                         highscore.setText(tempread+"");
@@ -429,7 +437,7 @@ timex.setFont(f2);
                 catch(FileNotFoundException | NumberFormatException u) {
                 try (FileWriter ohio = new FileWriter("save.txt")) {
                     ohio.write(playername+"\n");
-                    hscore = 100;
+                    
                     if(hscore>tempread) {
                         ohio.write(hscore+"\n");
                         highscore.setText(hscore+"");
