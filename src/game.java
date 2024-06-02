@@ -123,7 +123,7 @@ public class game implements ActionListener {
     public void scorer() {
 
         int randtime = ThreadLocalRandom.current().nextInt(5, 19 + 1);
-        tme-=800;
+        tme-=randtime;
         int randscor = ThreadLocalRandom.current().nextInt(100, 149 + 1);
         hscore=+randscor;
         highscore.setText(String.valueOf(hscore));
@@ -638,8 +638,8 @@ timex.setFont(f2);
                     //case beta(a2), b(s2) given
                     if ((ml.getText().equals("a"))
                             && (tl.getText().equals(String.valueOf(s2)))
-                            && (tr.getText().equals(String.valueOf(a1)))
-                            && (br.getText().equals(String.valueOf(a2))) && α.getText().equals(String.valueOf(a1))) {
+                            && (tr.getText().equals(String.valueOf("("+a1+")")))
+                            && (br.getText().equals(String.valueOf("("+a2+")"))) && α.getText().equals(String.valueOf(a1))) {
                         System.out.println("CORRECT");
                         scorer();
                     } else {
@@ -650,8 +650,8 @@ timex.setFont(f2);
                     //case gamma(a3), c(s3) given
                     if ((ml.getText().equals("a"))
                             && (tl.getText().equals(String.valueOf(s3)))
-                            && (tr.getText().equals(String.valueOf(a1)))
-                            && (br.getText().equals(String.valueOf(a3))) && α.getText().equals(String.valueOf(a1))) {
+                            && (tr.getText().equals(String.valueOf("("+a1+")")))
+                            && (br.getText().equals(String.valueOf("("+a3+")"))) && α.getText().equals(String.valueOf(a1))) {
                         System.out.println("CORRECT");
                         scorer();
 
@@ -666,8 +666,8 @@ timex.setFont(f2);
                     //case alpha(a1), a(s1) given
                     if ((ml.getText().equals("b"))
                             && (tl.getText().equals(String.valueOf(s1)))
-                            && (tr.getText().equals(String.valueOf(a2)))
-                            && (br.getText().equals(String.valueOf(a1))) && β.getText().equals(String.valueOf(a2))) {
+                            && (tr.getText().equals(String.valueOf("("+a2+")")))
+                            && (br.getText().equals(String.valueOf("("+a1+")"))) && β.getText().equals(String.valueOf(a2))) {
                         System.out.println("CORRECT");
                         scorer();
                     } else {
@@ -678,8 +678,8 @@ timex.setFont(f2);
                     //case gamma(a3), c(s3) given
                     if ((ml.getText().equals("b"))
                             && (tl.getText().equals(String.valueOf(s3)))
-                            && (tr.getText().equals(String.valueOf(a2)))
-                            && (br.getText().equals(String.valueOf(a3))) && β.getText().equals(String.valueOf(a2))) {
+                            && (tr.getText().equals(String.valueOf("("+a2+")")))
+                            && (br.getText().equals(String.valueOf("("+a3+")"))) && β.getText().equals(String.valueOf(a2))) {
                         System.out.println("CORRECT");
                         scorer();
                     } else {
@@ -693,8 +693,8 @@ timex.setFont(f2);
                     //case alpha(a1), a(s1) given
                     if ((ml.getText().equals("c"))
                             && (tl.getText().equals(String.valueOf(s1)))
-                            && (tr.getText().equals(String.valueOf(a3)))
-                            && (br.getText().equals(String.valueOf(a1))) && γ.getText().equals(String.valueOf(a3))) {
+                            && (tr.getText().equals(String.valueOf("("+a3+")")))
+                            && (br.getText().equals(String.valueOf("("+a1+")"))) && γ.getText().equals(String.valueOf(a3))) {
                         System.out.println("CORRECT");
                         scorer();
                     } else {
@@ -704,8 +704,8 @@ timex.setFont(f2);
                     //case beta(a2), b(s2) given
                     if ((ml.getText().equals("c"))
                             && (tl.getText().equals(String.valueOf(s2)))
-                            && (tr.getText().equals(String.valueOf(a1)))
-                            && (br.getText().equals(String.valueOf(a2))) && γ.getText().equals(String.valueOf(a3))) {
+                            && (tr.getText().equals(String.valueOf("("+a1+")")))
+                            && (br.getText().equals(String.valueOf("("+a2+")"))) && γ.getText().equals(String.valueOf(a3))) {
                         System.out.println("CORRECT");
                         scorer();
                     } else {
