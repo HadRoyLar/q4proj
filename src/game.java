@@ -50,6 +50,11 @@ public class game implements ActionListener {
     JLabel p1;
     JLabel p2;
     JLabel p3;
+    JLabel triangle;
+    
+    JLabel hscoretxt;
+    
+    
 
     
     /*
@@ -70,6 +75,7 @@ public class game implements ActionListener {
     JLabel bg;
     
     ImageIcon img;
+    ImageIcon xe;
     
     
     Timer timer = new Timer(1000, new ActionListener() {
@@ -88,7 +94,6 @@ public class game implements ActionListener {
         });
 
     JButton sendsel;
-    JTextField hyt;
     
     public void scorer() {
 
@@ -107,8 +112,7 @@ public class game implements ActionListener {
         frame = new JFrame("Game");
         novak = new JButton("");
         course = new JButton("CHANGE");
-        hyt = new JTextField("");
-        NEWS = new JButton("JSA");
+        NEWS = new JButton("SUBMIT");
         ml = new JButton("97");
         tl = new JButton("(12)");
         br = new JButton("(16)");
@@ -116,14 +120,16 @@ public class game implements ActionListener {
         sintop = new JLabel("sin");
         sinbot = new JLabel("sin");
         equal = new JLabel("=");
-        fraction = new JLabel("-----------------------------------------------------");
+        fraction = new JLabel("------------------------------------------------");
+        xe = new ImageIcon(getClass().getClassLoader().getResource("assets/illustration.png"));
+        triangle = new JLabel(new ImageIcon(xe.getImage().getScaledInstance(320, 180,  java.awt.Image.SCALE_FAST)));
         
         sendsel = new JButton("sendsel");
         a180 = new JLabel("180°");
 
-        AS1 = new JLabel("TEST1");
-        AS2 = new JLabel("TEST2");
-        AS3 = new JLabel("TEST3");
+        AS1 = new JLabel("A");
+        AS2 = new JLabel("B");
+        AS3 = new JLabel("C");
 
         α = new JTextField("α");
         β = new JTextField("β");
@@ -149,6 +155,7 @@ public class game implements ActionListener {
         
         timex = new JLabel("TIMEX");
         highscore = new JLabel("SCR");
+        hscoretxt = new JLabel("HIGHSCORE");
         
         bg = new JLabel();
         aeq = new JLabel("=");
@@ -156,15 +163,17 @@ public class game implements ActionListener {
         p2= new JLabel("+");
         p3 = new JLabel("+");
         
+        
+        
        
     }
     
     int shownext;
     
+    
     public void imageset() {
         
         int kj;
-         kj = shownext;
          kj = 1;
        
         
@@ -173,7 +182,7 @@ public class game implements ActionListener {
             case 0 -> {
                 
                 try{
-                     this.img = new ImageIcon(getClass().getResource("assets/bg.png"));
+                this.img = new ImageIcon(getClass().getClassLoader().getResource("assets/bg.png"));
                 bg.setIcon(new ImageIcon(img.getImage().getScaledInstance(1100, 600,  java.awt.Image.SCALE_FAST)));
                 frame.repaint();
                 frame.invalidate();
@@ -188,7 +197,7 @@ public class game implements ActionListener {
             
             case 1 -> {
                 try{
-                     this.img = new ImageIcon(getClass().getResource("assets/bg with scroll.png"));
+                this.img = new ImageIcon(getClass().getClassLoader().getResource("assets/bg with scroll.png"));
                 bg.setIcon(new ImageIcon(img.getImage().getScaledInstance(1100, 600,  java.awt.Image.SCALE_FAST)));
                 frame.repaint();
                 frame.invalidate();
@@ -212,6 +221,7 @@ public class game implements ActionListener {
         frame.setSize(1104, 615);
         frame.setVisible(true);
         frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+        frame.add(triangle, new Rectangle(2,0,10,10));
 
         frame.setResizable(false);
         novak.setText("HELS");
@@ -219,10 +229,19 @@ public class game implements ActionListener {
         novak.addActionListener(this);
         course.addActionListener(this);
         
-        frame.add(a180, new Rectangle(18,7,2,1));
-        frame.add(α, new Rectangle(21, 7, 2, 1));
-        frame.add(β, new Rectangle(24, 7, 2, 1));
-        frame.add(γ, new Rectangle(27, 7, 2, 1));
+        frame.add(a180, new Rectangle(18,6,2,1));
+        frame.add(aeq, new Rectangle(19,6,2,1));
+        aeq.setHorizontalAlignment(JLabel.CENTER);
+        frame.add(α, new Rectangle(21, 6, 2, 1));
+        α.setHorizontalAlignment(JTextField.CENTER);
+        frame.add(p1, new Rectangle(23,6,1,1));
+        p1.setHorizontalAlignment(JLabel.CENTER);
+        frame.add(β, new Rectangle(24, 6, 2, 1));
+        β.setHorizontalAlignment(JTextField.CENTER);
+        frame.add(p2, new Rectangle(26,6,1,1));
+        p2.setHorizontalAlignment(JLabel.CENTER);
+        frame.add(γ, new Rectangle(27, 6, 2, 1));
+        γ.setHorizontalAlignment(JTextField.CENTER);
         frame.add(ml, new Rectangle(18, 11, 2, 2));
         frame.add(tl, new Rectangle(22, 9, 2, 2));
         frame.add(sintop, new Rectangle(24, 9, 2, 2));
@@ -230,11 +249,16 @@ public class game implements ActionListener {
         frame.add(sinbot, new Rectangle(24, 13, 2, 2));
         frame.add(br, new Rectangle(26, 13, 2, 2));
         frame.add(equal, new Rectangle(20,11, 2, 2));
+        equal.setHorizontalAlignment(JTextField.CENTER);
         frame.add(fraction, new Rectangle(22, 11, 6, 2));
+        fraction.setHorizontalAlignment(JTextField.CENTER);
         frame.add(NEWS, new Rectangle(27, 16, 3, 1));
         frame.add(sendsel, new Rectangle(24, 4, 2, 2));
+        sendsel.setVisible(false);
         frame.add(timex, new Rectangle(29,1,2,2));
         frame.add(highscore, new Rectangle(10,5,2,2));
+        
+        
 
         ml.addActionListener(this);
         tl.addActionListener(this);
