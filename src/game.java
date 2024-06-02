@@ -45,6 +45,11 @@ public class game implements ActionListener {
     JLabel timex;
     JLabel highscore;
     int hscore = 0;
+    JLabel a180;
+    JLabel aeq;
+    JLabel p1;
+    JLabel p2;
+    JLabel p3;
 
     
     /*
@@ -114,6 +119,7 @@ public class game implements ActionListener {
         fraction = new JLabel("-----------------------------------------------------");
         
         sendsel = new JButton("sendsel");
+        a180 = new JLabel("180°");
 
         AS1 = new JLabel("TEST1");
         AS2 = new JLabel("TEST2");
@@ -145,6 +151,10 @@ public class game implements ActionListener {
         highscore = new JLabel("SCR");
         
         bg = new JLabel();
+        aeq = new JLabel("=");
+        p1 = new JLabel("+");
+        p2= new JLabel("+");
+        p3 = new JLabel("+");
         
        
     }
@@ -161,20 +171,32 @@ public class game implements ActionListener {
         switch(kj) {
             
             case 0 -> {
-                this.img = new ImageIcon(getClass().getResource("assets/bg.png"));
+                
+                try{
+                     this.img = new ImageIcon(getClass().getResource("assets/bg.png"));
                 bg.setIcon(new ImageIcon(img.getImage().getScaledInstance(1100, 600,  java.awt.Image.SCALE_FAST)));
                 frame.repaint();
                 frame.invalidate();
                 frame.validate();
+                }
+                catch(Exception s) {
+                    System.out.println("ImageFile Error");
+                }
+               
                 
             }
             
             case 1 -> {
-                this.img = new ImageIcon(getClass().getResource("assets/bg with scroll.png"));
+                try{
+                     this.img = new ImageIcon(getClass().getResource("assets/bg with scroll.png"));
                 bg.setIcon(new ImageIcon(img.getImage().getScaledInstance(1100, 600,  java.awt.Image.SCALE_FAST)));
-        frame.repaint();
-        frame.invalidate();
-        frame.validate();
+                frame.repaint();
+                frame.invalidate();
+                frame.validate();
+                }
+                catch(Exception s) {
+                    System.out.println("ImageFile Error");
+                }
                 
             }
         
@@ -196,10 +218,11 @@ public class game implements ActionListener {
 
         novak.addActionListener(this);
         course.addActionListener(this);
-
-        frame.add(α, new Rectangle(20, 7, 2, 1));
+        
+        frame.add(a180, new Rectangle(18,7,2,1));
+        frame.add(α, new Rectangle(21, 7, 2, 1));
         frame.add(β, new Rectangle(24, 7, 2, 1));
-        frame.add(γ, new Rectangle(28, 7, 2, 1));
+        frame.add(γ, new Rectangle(27, 7, 2, 1));
         frame.add(ml, new Rectangle(18, 11, 2, 2));
         frame.add(tl, new Rectangle(22, 9, 2, 2));
         frame.add(sintop, new Rectangle(24, 9, 2, 2));
