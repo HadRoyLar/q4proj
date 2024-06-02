@@ -151,6 +151,7 @@ public class game implements ActionListener {
         xe = new ImageIcon(getClass().getClassLoader().getResource("assets/illustration.png"));
         triangle = new JLabel(new ImageIcon(xe.getImage().getScaledInstance(320, 180,  java.awt.Image.SCALE_FAST)));
         prompt.setFont(f1);
+        
         sendsel = new JButton("sendsel");
         a180 = new JLabel("180°");
         leaderboard = new JLabel();
@@ -635,7 +636,7 @@ timex.setFont(f2);
                 //case s1 (a) unknown
                 if (velos == 0) {
                     //case beta(a2), b(s2) given
-                    if ((ml.getText().equals(String.valueOf(s1)))
+                    if ((ml.getText().equals("a"))
                             && (tl.getText().equals(String.valueOf(s2)))
                             && (tr.getText().equals(String.valueOf(a1)))
                             && (br.getText().equals(String.valueOf(a2))) && α.getText().equals(String.valueOf(a1))) {
@@ -647,7 +648,7 @@ timex.setFont(f2);
 
                 } else if (velos == 1) {
                     //case gamma(a3), c(s3) given
-                    if ((ml.getText().equals(String.valueOf(s1)))
+                    if ((ml.getText().equals("a"))
                             && (tl.getText().equals(String.valueOf(s3)))
                             && (tr.getText().equals(String.valueOf(a1)))
                             && (br.getText().equals(String.valueOf(a3))) && α.getText().equals(String.valueOf(a1))) {
@@ -663,7 +664,7 @@ timex.setFont(f2);
                 //case s2 (b) unknown
                 if (velos == 0) {
                     //case alpha(a1), a(s1) given
-                    if ((ml.getText().equals(String.valueOf(s2)))
+                    if ((ml.getText().equals("b"))
                             && (tl.getText().equals(String.valueOf(s1)))
                             && (tr.getText().equals(String.valueOf(a2)))
                             && (br.getText().equals(String.valueOf(a1))) && β.getText().equals(String.valueOf(a2))) {
@@ -675,7 +676,7 @@ timex.setFont(f2);
 
                 } else if (velos == 1) {
                     //case gamma(a3), c(s3) given
-                    if ((ml.getText().equals(String.valueOf(s2)))
+                    if ((ml.getText().equals("b"))
                             && (tl.getText().equals(String.valueOf(s3)))
                             && (tr.getText().equals(String.valueOf(a2)))
                             && (br.getText().equals(String.valueOf(a3))) && β.getText().equals(String.valueOf(a2))) {
@@ -690,7 +691,7 @@ timex.setFont(f2);
                 //case s3 (c) unknown
                 if (velos == 0) {
                     //case alpha(a1), a(s1) given
-                    if ((ml.getText().equals(String.valueOf(s3)))
+                    if ((ml.getText().equals("c"))
                             && (tl.getText().equals(String.valueOf(s1)))
                             && (tr.getText().equals(String.valueOf(a3)))
                             && (br.getText().equals(String.valueOf(a1))) && γ.getText().equals(String.valueOf(a3))) {
@@ -701,7 +702,7 @@ timex.setFont(f2);
                     }
                 } else if (velos == 1) {
                     //case beta(a2), b(s2) given
-                    if ((ml.getText().equals(String.valueOf(s3)))
+                    if ((ml.getText().equals("c"))
                             && (tl.getText().equals(String.valueOf(s2)))
                             && (tr.getText().equals(String.valueOf(a1)))
                             && (br.getText().equals(String.valueOf(a2))) && γ.getText().equals(String.valueOf(a3))) {
