@@ -146,22 +146,23 @@ public class game implements ActionListener {
         
         bg = new JLabel();
         
-        imageset();
+       
     }
     
     int shownext;
     
     public void imageset() {
         
-        int kj = 1;
+        int kj;
          kj = shownext;
+         kj = 1;
        
         
         switch(kj) {
             
             case 0 -> {
                 this.img = new ImageIcon(getClass().getResource("assets/bg.png"));
-                bg.setIcon(new ImageIcon(img.getImage().getScaledInstance(1120, 630,  java.awt.Image.SCALE_FAST)));
+                bg.setIcon(new ImageIcon(img.getImage().getScaledInstance(1100, 600,  java.awt.Image.SCALE_FAST)));
                 frame.repaint();
                 frame.invalidate();
                 frame.validate();
@@ -170,7 +171,7 @@ public class game implements ActionListener {
             
             case 1 -> {
                 this.img = new ImageIcon(getClass().getResource("assets/bg with scroll.png"));
-                bg.setIcon(new ImageIcon(img.getImage().getScaledInstance(1120, 630,  java.awt.Image.SCALE_FAST)));
+                bg.setIcon(new ImageIcon(img.getImage().getScaledInstance(1100, 600,  java.awt.Image.SCALE_FAST)));
         frame.repaint();
         frame.invalidate();
         frame.validate();
@@ -182,6 +183,7 @@ public class game implements ActionListener {
     }
 
     public void setFrame() {
+         
 
         //Window Parameters
         frame.setLayout(new GraphPaperLayout(new Dimension(32, 18)));
@@ -195,18 +197,18 @@ public class game implements ActionListener {
         novak.addActionListener(this);
         course.addActionListener(this);
 
-        frame.add(α, new Rectangle(1, 7, 2, 1));
-        frame.add(β, new Rectangle(3, 7, 2, 1));
-        frame.add(γ, new Rectangle(5, 7, 2, 1));
-        frame.add(ml, new Rectangle(9, 9, 2, 2));
-        frame.add(tl, new Rectangle(13, 7, 2, 2));
-        frame.add(sintop, new Rectangle(15, 7, 2, 2));
-        frame.add(tr, new Rectangle(17, 7, 2, 2));
-        frame.add(sinbot, new Rectangle(14, 11, 2, 2));
-        frame.add(br, new Rectangle(16, 11, 2, 2));
-        frame.add(equal, new Rectangle(11, 9, 2, 2));
-        frame.add(fraction, new Rectangle(13, 9, 6, 2));
-        frame.add(NEWS, new Rectangle(19, 9, 2, 2));
+        frame.add(α, new Rectangle(20, 7, 2, 1));
+        frame.add(β, new Rectangle(24, 7, 2, 1));
+        frame.add(γ, new Rectangle(28, 7, 2, 1));
+        frame.add(ml, new Rectangle(18, 11, 2, 2));
+        frame.add(tl, new Rectangle(22, 9, 2, 2));
+        frame.add(sintop, new Rectangle(24, 9, 2, 2));
+        frame.add(tr, new Rectangle(26, 9, 2, 2));
+        frame.add(sinbot, new Rectangle(24, 13, 2, 2));
+        frame.add(br, new Rectangle(26, 13, 2, 2));
+        frame.add(equal, new Rectangle(20,11, 2, 2));
+        frame.add(fraction, new Rectangle(22, 11, 6, 2));
+        frame.add(NEWS, new Rectangle(27, 16, 3, 1));
         frame.add(sendsel, new Rectangle(24, 4, 2, 2));
         frame.add(timex, new Rectangle(29,1,2,2));
         frame.add(highscore, new Rectangle(10,5,2,2));
@@ -269,6 +271,7 @@ public class game implements ActionListener {
         
         frame.add(bg, new Rectangle(0,0,32,18));
         saver();
+        imageset();
     }
     
     public void res() {
@@ -472,6 +475,7 @@ public class game implements ActionListener {
                     γ.setText("γ");
                     System.out.println("I want to find: c = " + s3);
                     System.out.println("I want to find: gamma = " + a3);
+                    
                 }
             }
         }
