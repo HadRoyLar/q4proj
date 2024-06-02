@@ -230,6 +230,7 @@ public class game implements ActionListener {
         course.addActionListener(this);
         
         frame.add(a180, new Rectangle(18,6,2,1));
+        a180.setHorizontalAlignment(JLabel.CENTER);
         frame.add(aeq, new Rectangle(19,6,2,1));
         aeq.setHorizontalAlignment(JLabel.CENTER);
         frame.add(α, new Rectangle(21, 6, 2, 1));
