@@ -1,6 +1,9 @@
 
+import jaco.mp3.player.MP3Player;
 import java.awt.Color;
 import java.awt.Dimension;
+import java.awt.Font;
+import java.awt.Insets;
 import java.awt.Rectangle;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
@@ -8,9 +11,13 @@ import java.io.File;
 import java.io.FileNotFoundException;
 import java.io.FileWriter;
 import java.io.IOException;
+import java.net.MalformedURLException;
+import java.net.URL;
 import java.util.Random;
 import java.util.Scanner;
 import java.util.concurrent.ThreadLocalRandom;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 import javax.swing.*;
 import javax.swing.event.DocumentEvent;
 import javax.swing.event.DocumentListener;
@@ -30,6 +37,11 @@ public class game implements ActionListener {
     JButton novak;
     JButton course;
 
+    
+     Font f0 = new Font(Font.DIALOG, Font.BOLD, 15); 
+      Font f1 = new Font(Font.SANS_SERIF, Font.TRUETYPE_FONT, 15); 
+      Font f2 = new Font(Font.SERIF, Font.TRUETYPE_FONT, 25); 
+     
     JButton ml;
     JButton tl;
     JButton br;
@@ -53,7 +65,14 @@ public class game implements ActionListener {
     JLabel triangle;
     
     JLabel hscoretxt;
+    JLabel prompt;
+    JLabel leaderboard;
     
+     MP3Player player = new MP3Player();
+    URL bgmuse;
+    
+    MP3Player press = new MP3Player();
+    URL click;
     
 
     
@@ -73,6 +92,7 @@ public class game implements ActionListener {
     
     
     JLabel bg;
+    JLabel given = new JLabel("Given is:");
     
     ImageIcon img;
     ImageIcon xe;
@@ -90,6 +110,10 @@ public class game implements ActionListener {
                timex.setText(String.valueOf(yme));
                frame.invalidate();
                frame.validate();
+               if(yme<11) {
+                   timex.setForeground(Color.red);
+                   press.play();
+               }
             }
         });
 
@@ -98,7 +122,7 @@ public class game implements ActionListener {
     public void scorer() {
 
         int randtime = ThreadLocalRandom.current().nextInt(5, 19 + 1);
-        tme-=randtime;
+        tme-=800;
         int randscor = ThreadLocalRandom.current().nextInt(100, 149 + 1);
         hscore=+randscor;
         highscore.setText(String.valueOf(hscore));
@@ -112,20 +136,24 @@ public class game implements ActionListener {
         frame = new JFrame("Game");
         novak = new JButton("");
         course = new JButton("CHANGE");
-        NEWS = new JButton("SUBMIT");
+        NEWS = new JButton("START");
         ml = new JButton("97");
         tl = new JButton("(12)");
         br = new JButton("(16)");
         tr = new JButton("(12)");
+        prompt = new JLabel("<html>Complete the formula step by step. Finish the angles on the figure first (figure not for scale). Then select the correct values for the equation using the buttons. Click on <b>start</b> to start. To submit finished equation, press <b>next</b>.</html>");
         sintop = new JLabel("sin");
         sinbot = new JLabel("sin");
         equal = new JLabel("=");
         fraction = new JLabel("------------------------------------------------");
         xe = new ImageIcon(getClass().getClassLoader().getResource("assets/illustration.png"));
         triangle = new JLabel(new ImageIcon(xe.getImage().getScaledInstance(320, 180,  java.awt.Image.SCALE_FAST)));
-        
+        prompt.setFont(f1);
         sendsel = new JButton("sendsel");
         a180 = new JLabel("180°");
+        leaderboard = new JLabel();
+        
+        
 
         AS1 = new JLabel("A");
         AS2 = new JLabel("B");
@@ -153,7 +181,7 @@ public class game implements ActionListener {
         y.init();
         z.init();
         
-        timex = new JLabel("TIMEX");
+        timex = new JLabel("60");
         highscore = new JLabel("SCR");
         hscoretxt = new JLabel("HIGHSCORE");
         
@@ -164,7 +192,25 @@ public class game implements ActionListener {
         p3 = new JLabel("+");
         
         
+         try {
+            bgmuse = new URL(getClass().getResource("assets/game.mp3").toExternalForm());
+        } catch (MalformedURLException ex) {
+            Logger.getLogger(game.class.getName()).log(Level.SEVERE, null, ex);
+        }
         
+        player.addToPlayList(bgmuse);
+        
+        try {
+            click = new URL(getClass().getResource("assets/click.mp3").toExternalForm());
+        } catch (MalformedURLException ex) {
+            Logger.getLogger(game.class.getName()).log(Level.SEVERE, null, ex);
+        }
+        
+        press.addToPlayList(click);
+        
+
+    player.setRepeat(true); 
+  
        
     }
     
@@ -187,6 +233,7 @@ public class game implements ActionListener {
                 frame.repaint();
                 frame.invalidate();
                 frame.validate();
+                
                 }
                 catch(Exception s) {
                     System.out.println("ImageFile Error");
@@ -215,34 +262,42 @@ public class game implements ActionListener {
 
     public void setFrame() {
          
-
+timex.setFont(f2);
         //Window Parameters
         frame.setLayout(new GraphPaperLayout(new Dimension(32, 18)));
         frame.setSize(1104, 615);
         frame.setVisible(true);
         frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-        frame.add(triangle, new Rectangle(2,0,10,10));
-
+        frame.add(triangle, new Rectangle(18,0,10,10));
+        frame.add(prompt, new Rectangle(3,0,8,5));
         frame.setResizable(false);
         novak.setText("HELS");
 
+        
+        frame.add(given, new Rectangle(2,5,10,1));
+        given.setFont(f1);
         novak.addActionListener(this);
         course.addActionListener(this);
         
-        frame.add(a180, new Rectangle(18,6,2,1));
-        a180.setHorizontalAlignment(JLabel.CENTER);
-        frame.add(aeq, new Rectangle(19,6,2,1));
-        aeq.setHorizontalAlignment(JLabel.CENTER);
-        frame.add(α, new Rectangle(21, 6, 2, 1));
+        
+        frame.add(AS1, new Rectangle(5,6,8,1));
+        frame.add(AS2, new Rectangle(5,7,8,1));
+        frame.add(AS3, new Rectangle(5,8,8,1));
+        
+        frame.add(α, new Rectangle(18, 8, 2, 1));
         α.setHorizontalAlignment(JTextField.CENTER);
-        frame.add(p1, new Rectangle(23,6,1,1));
-        p1.setHorizontalAlignment(JLabel.CENTER);
-        frame.add(β, new Rectangle(24, 6, 2, 1));
+        
+        
+        frame.add(β, new Rectangle(24, 2, 2, 1));
         β.setHorizontalAlignment(JTextField.CENTER);
-        frame.add(p2, new Rectangle(26,6,1,1));
-        p2.setHorizontalAlignment(JLabel.CENTER);
-        frame.add(γ, new Rectangle(27, 6, 2, 1));
+        
+        
+        frame.add(γ, new Rectangle(26, 7, 2, 1));
         γ.setHorizontalAlignment(JTextField.CENTER);
+        
+        frame.add(leaderboard, new Rectangle(4,10,5,1));
+        leaderboard.setFont(f1);
+        leaderboard.setForeground(Color.WHITE);
         frame.add(ml, new Rectangle(18, 11, 2, 2));
         frame.add(tl, new Rectangle(22, 9, 2, 2));
         frame.add(sintop, new Rectangle(24, 9, 2, 2));
@@ -258,8 +313,9 @@ public class game implements ActionListener {
         sendsel.setVisible(false);
         frame.add(timex, new Rectangle(29,1,2,2));
         frame.add(highscore, new Rectangle(10,5,2,2));
+        highscore.setVisible(false);
         
-        
+        sintop.setHorizontalAlignment(JLabel.CENTER);
 
         ml.addActionListener(this);
         tl.addActionListener(this);
@@ -320,11 +376,25 @@ public class game implements ActionListener {
         frame.add(bg, new Rectangle(0,0,32,18));
         saver();
         imageset();
+        
+        tr.setFont(f0);
+        tl.setFont(f0);
+        br.setFont(f0);
+        ml.setFont(f0);
+        
+        br.setMargin(new Insets(0,0,0,0));
+        tr.setMargin(new Insets(0,0,0,0));
+        tl.setMargin(new Insets(0,0,0,0));
+        ml.setMargin(new Insets(0,0,0,0));
+        
+        saver();
     }
     
     public void res() {
         timer.stop();
         saver();
+        NEWS.setEnabled(false);
+        player.stop();
     }
     
     
@@ -341,13 +411,15 @@ public class game implements ActionListener {
                 
                 try (FileWriter ohio = new FileWriter("save.txt")) {
                     ohio.write(playername+"\n");
-                    hscore = 100;
                     if(hscore>tempread) {
                         ohio.write(hscore+"\n");
                         highscore.setText(hscore+"");
+                        
                     }
                     else {
+                        
                         ohio.write(tempread+"\n");
+                        hscore = tempread;
                         highscore.setText(tempread+"");
                     }   }
             catch(IOException s) {
@@ -371,7 +443,7 @@ public class game implements ActionListener {
             }
             }
             
-            
+            leaderboard.setText("<html>Score <b>"+hscore+"</b> by <b>"+playername+"</b></html>");
 
     }
     
@@ -388,6 +460,10 @@ public class game implements ActionListener {
     double s1; //equals to a
     double s2; //equals to b
     double s3; //equals to c
+    
+    public void illus() {
+        
+    }
 
     public void sider() {
 
@@ -404,11 +480,16 @@ public class game implements ActionListener {
             System.out.println("Side 3:: " + s3);
         } while ((s1 == s2) || (s1 == s3) || (s2 == s3));
         
+        
+        newline();
+        
         }
 
     double a1; //equals to alpha
     double a2; //equals to beta
     double a3; //equals to gamma
+    
+    
 
     public void angler() {
 
@@ -445,91 +526,94 @@ public class game implements ActionListener {
         switch (decider) {
             case 0 -> {
                 //case s1 (a) unknown
+                
+                 vars[0] = "a";
+                    vars[1] = String.valueOf(s2);
+                    vars[2] = String.valueOf(s3);
+                    given.setText("Given are these values, when a is unknown:");
+                    
+                    
                 if (velos == 0) {
                     //case beta(a2), b(s2) given
-                    System.out.println("GivenIs:");
-                    System.out.println("b = " + s2);
-                    System.out.println("beta = " + a2);
-                    System.out.println("gamma = " + a3);
+                     AS1.setText("b = " + s2);
+                    AS2.setText("β = " + a2);
+                    AS3.setText("γ = " + a3);
+                    
+                    
                     α.setText("α");
                     β.setText(a2 + "");
                     γ.setText(a3 + "");
-                    System.out.println("I want to find: a = " + s1);
-                    System.out.println("I want to find: alpha = " + a1);
 
                 } else if (velos == 1) {
                     //case gamma(a3), c(s3) given
-                    System.out.println("GivenIs:");
-                    System.out.println("c = " + s3);
-                    System.out.println("beta = " + a2);
-                    System.out.println("gamma = " + a3);
                     α.setText("α");
+                    
                     β.setText(a2 + "");
                     γ.setText(a3 + "");
-                    System.out.println("I want to find: a = " + s1);
-                    System.out.println("I want to find: alpha = " + a1);
+                    
+                    AS1.setText("c = " + s3);
+                    AS2.setText("β = " + a2);
+                    AS3.setText("γ = " + a3);
 
                 }
             }
             case 1 -> {
                 //case s2 (b) unknown
+                vars[0] = String.valueOf(s1);
+                    vars[1] ="b";
+                    vars[2] = String.valueOf(s3);
+                    given.setText("Given are these values, when b is unknown:");
+                    
                 if (velos == 0) {
                     //case alpha(a1), a(s1) given
-                    System.out.println("GivenIs:");
-                    System.out.println("a = " + s1);
-                    System.out.println("alpha = " + a1);
-                    System.out.println("gamma = " + a3);
+                    AS1.setText("a = " + s1);
+                    AS2.setText("α = " + a1);
+                    AS3.setText("γ = " + a3);
                     α.setText(a1 + "");
                     β.setText("β");
                     γ.setText(a3 + "");
-                    System.out.println("I want to find: b = " + s2);
-                    System.out.println("I want to find: beta = " + a2);
+                    
+                    
 
                 } else if (velos == 1) {
                     //case gamma(a3), c(s3) given
-                    System.out.println("GivenIs:");
-                    System.out.println("c = " + s3);
-                    System.out.println("alpha = " + a1);
-                    System.out.println("gamma = " + a3);
+                   AS1.setText("c = " + s3);
+                    AS2.setText("α = " + a1);
+                    AS3.setText("γ = " + a3);
                     α.setText(a1 + "");
                     β.setText("β");
                     γ.setText(a3 + "");
-                    System.out.println("I want to find: b = " + s2);
-                    System.out.println("I want to find: beta = " + a2);
                 }
             }
 
             case 2 -> {
                 //case s3 (c) unknown
+                given.setText("Given are these values, when c is unknown:");
+                vars[0] = String.valueOf(s1);
+                    vars[1] = String.valueOf(s2);
+                    vars[2] = "c";
+                    
                 if (velos == 0) {
                     //case alpha(a1), a(s1) given
-                    System.out.println("GivenIs:");
-                    System.out.println("a = " + s1);
-                    System.out.println("alpha = " + a1);
-                    System.out.println("beta = " + a2);
+                    AS1.setText("a = " + s1);
+                    AS2.setText("α = " + a1);
+                    AS3.setText("β = " + a2);
                     α.setText(a1 + "");
                     β.setText(a2 + "");
                     γ.setText("γ");
-                    System.out.println("I want to find: c = " + s3);
-                    System.out.println("I want to find: gamma = " + a3);
                 } else if (velos == 1) {
                     //case beta(a2), b(s2) given
-                    System.out.println("GivenIs:");
-                    System.out.println("b = " + s2);
-                    System.out.println("alpha = " + a1);
-                    System.out.println("beta =` " + a2);
+                    AS1.setText("b = " + s2);
+                    AS2.setText("α = " + a1);
+                    AS3.setText("β =` " + a2);
                     α.setText(a1 + "");
                     β.setText(a2 + "");
                     γ.setText("γ");
-                    System.out.println("I want to find: c = " + s3);
-                    System.out.println("I want to find: gamma = " + a3);
                     
                 }
             }
         }
         
-
-        newline();
     }
 
     public void checker() {
@@ -671,6 +755,9 @@ public class game implements ActionListener {
                 timer.start();
                 frame.invalidate();
                 frame.validate();
+                  player.play();
+                  press.play();
+                  NEWS.setText("NEXT");
             } else {
                 checker();
                 sequence();
@@ -678,6 +765,7 @@ public class game implements ActionListener {
             count++;
 
         } else if (e.getSource() == ml) {
+            press.play();
             Random rand = new Random();
 
             sk = w.gen();
@@ -695,6 +783,7 @@ public class game implements ActionListener {
             ml.setBackground(new Color(r, g, b));
 
         } else if (e.getSource() == tl) {
+            press.play();
             Random rand = new Random();
 
             sk = x.gen();
@@ -712,6 +801,7 @@ public class game implements ActionListener {
             tl.setBackground(new Color(r, g, b));
 
         } else if (e.getSource() == tr) {
+            press.play();
             Random rand = new Random();
 
             sk = y.gen();
@@ -721,7 +811,7 @@ public class game implements ActionListener {
             } else {
             }
 
-            tr.setText(vars[sk[c]]);
+            tr.setText("("+vars[sk[c]]+")");
             c++;
 
             float r = (float) (rand.nextFloat() / 2f + 0.5);
@@ -731,6 +821,7 @@ public class game implements ActionListener {
             
 
         } else if (e.getSource() == br) {
+            press.play();
             Random rand = new Random();
             
             sk = z.gen();
@@ -739,7 +830,7 @@ public class game implements ActionListener {
                 d = 0;
             } else {
             }
-            br.setText(vars[sk[d]]);
+            br.setText("( "+vars[sk[d]]+" )");
             d++;
             float r = (float) (rand.nextFloat() / 2f + 0.5);
             float g = (float) (rand.nextFloat() / 2f + 0.5);
