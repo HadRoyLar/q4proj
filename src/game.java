@@ -145,7 +145,7 @@ public class game implements ActionListener {
         prompt = new JLabel("<html>Complete the formula step by step. Finish the angles on the figure first (figure not for scale). Then select the correct values for the equation using the buttons. Click on <b>start</b> to start. To submit finished equation, press <b>next</b>.</html>");
         sintop = new JLabel("sin");
         sinbot = new JLabel("sin");
-        name = new JTextField("Your Name");
+        name = new JTextField("Put Your Name Here!");
         equal = new JLabel("=");
         fraction = new JLabel("------------------------------------------------");
         xe = new ImageIcon(getClass().getClassLoader().getResource("assets/illustration.png"));
@@ -275,7 +275,7 @@ timex.setFont(f2);
         frame.setResizable(false);
         novak.setText("HELS");
 
-        
+        frame.add(name, new Rectangle(3,11,6,1));
         frame.add(given, new Rectangle(2,5,10,1));
         given.setFont(f1);
         novak.addActionListener(this);
