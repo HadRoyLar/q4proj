@@ -103,14 +103,14 @@ public class game implements ActionListener {
 
             @Override
             public void actionPerformed(ActionEvent e) {
-                if (tme==60) {
+                if (tme==1000) {
                     res();
                 }
-                int yme = 60-tme++;
+                int yme = 1000-tme++;
                timex.setText(String.valueOf(yme));
                frame.invalidate();
                frame.validate();
-               if(yme<11) {
+               if(yme<90) {
                    timex.setForeground(Color.red);
                    press.play();
                }
@@ -138,10 +138,10 @@ public class game implements ActionListener {
         novak = new JButton("");
         course = new JButton("CHANGE");
         NEWS = new JButton("START");
-        ml = new JButton("97");
-        tl = new JButton("(12)");
-        br = new JButton("(16)");
-        tr = new JButton("(12)");
+        ml = new JButton("A");
+        tl = new JButton("B");
+        br = new JButton("(D)");
+        tr = new JButton("(C)");
         prompt = new JLabel("<html>Complete the formula step by step. Finish the angles on the figure first (figure not for scale). Then select the correct values for the equation using the buttons. Click on <b>start</b> to start. To submit finished equation, press <b>next</b>.</html>");
         sintop = new JLabel("sin");
         sinbot = new JLabel("sin");
@@ -636,7 +636,7 @@ timex.setFont(f2);
                 //case s1 (a) unknown
                 if (velos == 0) {
                     //case beta(a2), b(s2) given
-                    if ((ml.getText().equals("a"))
+                    if ((ml.getText().equals(String.valueOf("a")))
                             && (tl.getText().equals(String.valueOf(s2)))
                             && (tr.getText().equals(String.valueOf("("+a1+")")))
                             && (br.getText().equals(String.valueOf("("+a2+")"))) && α.getText().equals(String.valueOf(a1))) {
@@ -648,7 +648,7 @@ timex.setFont(f2);
 
                 } else if (velos == 1) {
                     //case gamma(a3), c(s3) given
-                    if ((ml.getText().equals("a"))
+                    if (((ml.getText().equals(String.valueOf("a"))))
                             && (tl.getText().equals(String.valueOf(s3)))
                             && (tr.getText().equals(String.valueOf("("+a1+")")))
                             && (br.getText().equals(String.valueOf("("+a3+")"))) && α.getText().equals(String.valueOf(a1))) {
@@ -664,7 +664,7 @@ timex.setFont(f2);
                 //case s2 (b) unknown
                 if (velos == 0) {
                     //case alpha(a1), a(s1) given
-                    if ((ml.getText().equals("b"))
+                    if ((ml.getText().equals(String.valueOf("b")))
                             && (tl.getText().equals(String.valueOf(s1)))
                             && (tr.getText().equals(String.valueOf("("+a2+")")))
                             && (br.getText().equals(String.valueOf("("+a1+")"))) && β.getText().equals(String.valueOf(a2))) {
@@ -676,7 +676,7 @@ timex.setFont(f2);
 
                 } else if (velos == 1) {
                     //case gamma(a3), c(s3) given
-                    if ((ml.getText().equals("b"))
+                    if ((ml.getText().equals(String.valueOf("b")))
                             && (tl.getText().equals(String.valueOf(s3)))
                             && (tr.getText().equals(String.valueOf("("+a2+")")))
                             && (br.getText().equals(String.valueOf("("+a3+")"))) && β.getText().equals(String.valueOf(a2))) {
@@ -691,7 +691,7 @@ timex.setFont(f2);
                 //case s3 (c) unknown
                 if (velos == 0) {
                     //case alpha(a1), a(s1) given
-                    if ((ml.getText().equals("c"))
+                    if ((ml.getText().equals(String.valueOf("c")))
                             && (tl.getText().equals(String.valueOf(s1)))
                             && (tr.getText().equals(String.valueOf("("+a3+")")))
                             && (br.getText().equals(String.valueOf("("+a1+")"))) && γ.getText().equals(String.valueOf(a3))) {
@@ -702,7 +702,7 @@ timex.setFont(f2);
                     }
                 } else if (velos == 1) {
                     //case beta(a2), b(s2) given
-                    if ((ml.getText().equals("c"))
+                    if ((ml.getText().equals(String.valueOf("c")))
                             && (tl.getText().equals(String.valueOf(s2)))
                             && (tr.getText().equals(String.valueOf("("+a1+")")))
                             && (br.getText().equals(String.valueOf("("+a2+")"))) && γ.getText().equals(String.valueOf(a3))) {
@@ -839,7 +839,7 @@ timex.setFont(f2);
                 d = 0;
             } else {
             }
-            br.setText("( "+vars[sk[d]]+" )");
+            br.setText("("+vars[sk[d]]+")");
             d++;
             float r = (float) (rand.nextFloat() / 2f + 0.5);
             float g = (float) (rand.nextFloat() / 2f + 0.5);
