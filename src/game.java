@@ -4,7 +4,12 @@ import java.awt.Dimension;
 import java.awt.Rectangle;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import java.io.File;
+import java.io.FileNotFoundException;
+import java.io.FileWriter;
+import java.io.IOException;
 import java.util.Random;
+import java.util.Scanner;
 import java.util.concurrent.ThreadLocalRandom;
 import javax.swing.*;
 import javax.swing.event.DocumentEvent;
@@ -18,6 +23,7 @@ import javax.swing.event.DocumentListener;
  *
  * @author Royce Lariego
  */
+
 public class game implements ActionListener {
 
     JFrame frame;
@@ -33,13 +39,14 @@ public class game implements ActionListener {
     JLabel equal;
     JLabel fraction;
     JButton NEWS;
-
     JLabel AS1;
     JLabel AS2;
     JLabel AS3;
-    
-    JSpinner ppk;
+    JLabel timex;
+    JLabel highscore;
+    int hscore = 0;
 
+    
     /*
     
                   (var1)sin(var2)
@@ -47,16 +54,50 @@ public class game implements ActionListener {
                      sin (var3)
      
      */
+    
+    
     JTextField α;
     JTextField β;
     JTextField γ;
+    int tme = 0;
+    
+    
+    JLabel bg;
+    
+    ImageIcon img;
+    
+    
+    Timer timer = new Timer(1000, new ActionListener() {
+            
+
+            @Override
+            public void actionPerformed(ActionEvent e) {
+                if (tme==60) {
+                    res();
+                }
+                int yme = 60-tme++;
+               timex.setText(String.valueOf(yme));
+               frame.invalidate();
+               frame.validate();
+            }
+        });
 
     JButton sendsel;
-
     JTextField hyt;
+    
+    public void scorer() {
 
+        int randtime = ThreadLocalRandom.current().nextInt(5, 19 + 1);
+        tme-=randtime;
+        int randscor = ThreadLocalRandom.current().nextInt(100, 149 + 1);
+        hscore=+randscor;
+        highscore.setText(String.valueOf(hscore));
+        
+        
+    }
+
+    
     public game() {
-
         //Window Parameter
         frame = new JFrame("Game");
         novak = new JButton("");
@@ -72,7 +113,6 @@ public class game implements ActionListener {
         equal = new JLabel("=");
         fraction = new JLabel("-----------------------------------------------------");
         
-        ppk = new JSpinner(new SpinnerNumberModel(5,0,10,1));
         sendsel = new JButton("sendsel");
 
         AS1 = new JLabel("TEST1");
@@ -100,14 +140,52 @@ public class game implements ActionListener {
         x.init();
         y.init();
         z.init();
-
+        
+        timex = new JLabel("TIMEX");
+        highscore = new JLabel("SCR");
+        
+        bg = new JLabel();
+        
+        imageset();
+    }
+    
+    int shownext;
+    
+    public void imageset() {
+        
+        int kj = 1;
+         kj = shownext;
+       
+        
+        switch(kj) {
+            
+            case 0 -> {
+                this.img = new ImageIcon(getClass().getResource("assets/bg.png"));
+                bg.setIcon(new ImageIcon(img.getImage().getScaledInstance(1120, 630,  java.awt.Image.SCALE_FAST)));
+                frame.repaint();
+                frame.invalidate();
+                frame.validate();
+                
+            }
+            
+            case 1 -> {
+                this.img = new ImageIcon(getClass().getResource("assets/bg with scroll.png"));
+                bg.setIcon(new ImageIcon(img.getImage().getScaledInstance(1120, 630,  java.awt.Image.SCALE_FAST)));
+        frame.repaint();
+        frame.invalidate();
+        frame.validate();
+                
+            }
+        
+    }
+        
     }
 
     public void setFrame() {
 
         //Window Parameters
         frame.setLayout(new GraphPaperLayout(new Dimension(32, 18)));
-        frame.setSize(1120, 630);
+        frame.setSize(1104, 615);
         frame.setVisible(true);
         frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 
@@ -130,23 +208,8 @@ public class game implements ActionListener {
         frame.add(fraction, new Rectangle(13, 9, 6, 2));
         frame.add(NEWS, new Rectangle(19, 9, 2, 2));
         frame.add(sendsel, new Rectangle(24, 4, 2, 2));
-        
-        frame.add(ppk, new Rectangle(5,6,3,3));
-        
-        
-        Timer timer = new Timer(1000, new ActionListener() {
-            int count = 0;
-
-            @Override
-            public void actionPerformed(ActionEvent e) {
-               System.out.println(count++);
-            }
-        });
-
-        // Start the timer
-        timer.start();
-
-        
+        frame.add(timex, new Rectangle(29,1,2,2));
+        frame.add(highscore, new Rectangle(10,5,2,2));
 
         ml.addActionListener(this);
         tl.addActionListener(this);
@@ -156,7 +219,6 @@ public class game implements ActionListener {
         NEWS.addActionListener(this);
         sendsel.addActionListener(this);
 
-        frame.add(hyt, new Rectangle(5, 4, 10, 3));
 
         α.getDocument().addDocumentListener(new DocumentListener() {
             @Override
@@ -203,10 +265,70 @@ public class game implements ActionListener {
             public void changedUpdate(DocumentEvent e) {
             }
         });
+        
+        
+        frame.add(bg, new Rectangle(0,0,32,18));
+        saver();
+    }
+    
+    public void res() {
+        timer.stop();
+        saver();
+    }
+    
+    
+    
+    String playername = "Elite";
+    
+    public void saver() {
+            try {
+                File haynaku = new File("save.txt");
+                Scanner guy = new Scanner(haynaku);
+                playername = guy.nextLine();
+                String duha = guy.nextLine();
+                tempread = Integer.parseInt(duha);
+                
+                try (FileWriter ohio = new FileWriter("save.txt")) {
+                    ohio.write(playername+"\n");
+                    hscore = 100;
+                    if(hscore>tempread) {
+                        ohio.write(hscore+"\n");
+                        highscore.setText(hscore+"");
+                    }
+                    else {
+                        ohio.write(tempread+"\n");
+                        highscore.setText(tempread+"");
+                    }   }
+            catch(IOException s) {
+                System.out.println("Save Error");
+            }
+            }
+                catch(FileNotFoundException | NumberFormatException u) {
+                try (FileWriter ohio = new FileWriter("save.txt")) {
+                    ohio.write(playername+"\n");
+                    hscore = 100;
+                    if(hscore>tempread) {
+                        ohio.write(hscore+"\n");
+                        highscore.setText(hscore+"");
+                    }
+                    else {
+                        ohio.write(tempread+"\n");
+                        highscore.setText(tempread+"");
+                    }   }
+            catch(IOException s) {
+                System.out.println("Save Error");
+            }
+            }
+            
+            
 
     }
-
+    
+    int tempread = 0;
+    
+   
     public static void main(String[] args) {
+        
         game x = new game();
         x.setFrame();
 
@@ -230,8 +352,8 @@ public class game implements ActionListener {
             s3 = (double) Math.round(s3 * 100) / 100;
             System.out.println("Side 3:: " + s3);
         } while ((s1 == s2) || (s1 == s3) || (s2 == s3));
-
-    }
+        
+        }
 
     double a1; //equals to alpha
     double a2; //equals to beta
@@ -259,11 +381,6 @@ public class game implements ActionListener {
 
     int decider;
     int velos;
-
-    public double[] autoset() {
-
-        return null;
-    }
 
     int[] ded;
 
@@ -349,7 +466,7 @@ public class game implements ActionListener {
                     System.out.println("GivenIs:");
                     System.out.println("b = " + s2);
                     System.out.println("alpha = " + a1);
-                    System.out.println("beta = " + a2);
+                    System.out.println("beta =` " + a2);
                     α.setText(a1 + "");
                     β.setText(a2 + "");
                     γ.setText("γ");
@@ -359,10 +476,8 @@ public class game implements ActionListener {
             }
         }
         
-        ((JSpinner.DefaultEditor)ppk.getEditor()).getTextField().setEditable(false);
 
         newline();
-
     }
 
     public void checker() {
@@ -381,6 +496,7 @@ public class game implements ActionListener {
                             && (tr.getText().equals(String.valueOf(a1)))
                             && (br.getText().equals(String.valueOf(a2))) && α.getText().equals(String.valueOf(a1))) {
                         System.out.println("CORRECT");
+                        scorer();
                     } else {
                         System.out.println("INCORRECT");
                     }
@@ -392,6 +508,7 @@ public class game implements ActionListener {
                             && (tr.getText().equals(String.valueOf(a1)))
                             && (br.getText().equals(String.valueOf(a3))) && α.getText().equals(String.valueOf(a1))) {
                         System.out.println("CORRECT");
+                        scorer();
 
                     } else {
                         System.out.println("INCORRECT");
@@ -407,6 +524,7 @@ public class game implements ActionListener {
                             && (tr.getText().equals(String.valueOf(a2)))
                             && (br.getText().equals(String.valueOf(a1))) && β.getText().equals(String.valueOf(a2))) {
                         System.out.println("CORRECT");
+                        scorer();
                     } else {
                         System.out.println("INCORRECT");
                     }
@@ -418,6 +536,7 @@ public class game implements ActionListener {
                             && (tr.getText().equals(String.valueOf(a2)))
                             && (br.getText().equals(String.valueOf(a3))) && β.getText().equals(String.valueOf(a2))) {
                         System.out.println("CORRECT");
+                        scorer();
                     } else {
                         System.out.println("INCORRECT");
                     }
@@ -432,6 +551,7 @@ public class game implements ActionListener {
                             && (tr.getText().equals(String.valueOf(a3)))
                             && (br.getText().equals(String.valueOf(a1))) && γ.getText().equals(String.valueOf(a3))) {
                         System.out.println("CORRECT");
+                        scorer();
                     } else {
                         System.out.println("INCORRECT");
                     }
@@ -442,13 +562,10 @@ public class game implements ActionListener {
                             && (tr.getText().equals(String.valueOf(a1)))
                             && (br.getText().equals(String.valueOf(a2))) && γ.getText().equals(String.valueOf(a3))) {
                         System.out.println("CORRECT");
+                        scorer();
                     } else {
                         System.out.println("INCORRECT");
-                    }
-                }
-            }
-        }
-    }
+                    }}}}}
 
     public void newline() {
 
@@ -485,9 +602,7 @@ public class game implements ActionListener {
     
     public void gty() {
         
-        String j = String.valueOf(ppk.getValue());
-        System.out.println(j);
-        ppk.setValue(29);
+        
         
     }
 
@@ -501,6 +616,7 @@ public class game implements ActionListener {
 
             if (count == 0) {
                 sequence();
+                timer.start();
                 frame.invalidate();
                 frame.validate();
             } else {
